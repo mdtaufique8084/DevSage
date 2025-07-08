@@ -4,6 +4,7 @@ import com.devSage.blog.blog_app_apis.Entity.User;
 import com.devSage.blog.blog_app_apis.Exceptions.ResourceNotFoundException;
 import com.devSage.blog.blog_app_apis.Payloads.UserDto;
 import com.devSage.blog.blog_app_apis.Repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository; // proxy class of userRepo interface made the object of proxy class
+
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public UserDto createUser(UserDto userDto) {
         User user=this.dtoToEntity(userDto);
@@ -56,22 +60,22 @@ public class UserServiceImpl implements UserService{
 
 
     private User dtoToEntity(UserDto userDto){
-        User user=new User();
-        user.setId(userDto.getId());
-        user.setName(userDto.getName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setAbout(userDto.getAbout());
+        User user=modelMapper.map(userDto,User.class);
+//        user.setId(userDto.getId());
+//        user.setName(userDto.getName());
+//        user.setEmail(userDto.getEmail());
+//        user.setPassword(userDto.getPassword());
+//        user.setAbout(userDto.getAbout());
         return user;
     }
 
     private UserDto entityToDto(User user){
-        UserDto userDto=new UserDto();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-        userDto.setPassword(user.getPassword());
-        userDto.setAbout(user.getAbout());
+        UserDto userDto=modelMapper.map(user,UserDto.class);
+//        userDto.setId(user.getId());
+//        userDto.setName(user.getName());
+//        userDto.setEmail(user.getEmail());
+//        userDto.setPassword(user.getPassword());
+//        userDto.setAbout(user.getAbout());
         return userDto;
     }
 }
