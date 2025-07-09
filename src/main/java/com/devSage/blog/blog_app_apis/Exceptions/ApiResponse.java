@@ -1,4 +1,4 @@
-package com.devSage.blog.blog_app_apis;
+package com.devSage.blog.blog_app_apis.Exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

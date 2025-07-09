@@ -1,6 +1,5 @@
 package com.devSage.blog.blog_app_apis.Exceptions;
 
-import com.devSage.blog.blog_app_apis.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

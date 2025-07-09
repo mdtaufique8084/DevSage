@@ -1,20 +1,18 @@
 package com.devSage.blog.blog_app_apis.Controllers;
 
-import com.devSage.blog.blog_app_apis.ApiResponse;
+import com.devSage.blog.blog_app_apis.Exceptions.ApiResponse;
 import com.devSage.blog.blog_app_apis.Payloads.UserDto;
 import com.devSage.blog.blog_app_apis.Services.UserService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserController {
     @Autowired
     private UserService userService;
