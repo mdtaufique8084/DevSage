@@ -15,6 +15,6 @@ public class PostDto {
     private String content;
     private String imageName;
     private Date addedDate;
-    private UserDto user; // to avoid recursion we not used User but used UserDto
+    private UserDto user; // to avoid recursion we have not used User but used UserDto
     private CategoryDto category;
 }

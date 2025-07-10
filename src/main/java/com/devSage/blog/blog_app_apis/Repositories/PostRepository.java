@@ -10,5 +10,9 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post,Integer> {
     List<Post> findByUser(User user);
     List<Post> findByCategory(Category category);
-//    List<Post> findByTitleContaining(String title);
+
+    List<Post> findByPostTitleContaining(String postTitle);
+
+//    @Query("SELECT p FROM Post p WHERE LOWER(p.postTitle) LIKE LOWER(CONCAT('%', :title, '%'))")
+//    List<Post> searchByTitle(@Param("title") String title);
 }
