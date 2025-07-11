@@ -7,6 +7,7 @@ import com.devSage.blog.blog_app_apis.Payloads.PostResponse;
 import com.devSage.blog.blog_app_apis.Services.FileService;
 import com.devSage.blog.blog_app_apis.Services.PostService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class PostController {
 
     // Create post
     @PostMapping("/user/{userId}/category/{categoryId}/posts")
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto,
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto,
                                               @PathVariable Integer userId,
                                               @PathVariable Integer categoryId) {
         PostDto createdPost = postService.createPost(postDto, userId, categoryId);
@@ -45,7 +46,7 @@ public class PostController {
 
     // Update post (text only)
     @PutMapping("/updatePost/{postId}")
-    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId) {
+    public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable Integer postId) {
         PostDto updated = postService.updatePost(postDto, postId);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
@@ -53,6 +54,7 @@ public class PostController {
     // Update post with image (combined)
     @PutMapping(value = "/updatePostWithImage/{postId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<PostDto> updatePostWithImage(
+            @Valid
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             @RequestParam(value = "image", required = false) MultipartFile image,
@@ -124,6 +126,7 @@ public class PostController {
     // Upload image only
     @PostMapping("/post/image/upload/{postId}")
     public ResponseEntity<PostDto> uploadImageOnly(
+            @Valid
             @RequestParam("image") MultipartFile image,
             @PathVariable Integer postId) throws IOException {
 
