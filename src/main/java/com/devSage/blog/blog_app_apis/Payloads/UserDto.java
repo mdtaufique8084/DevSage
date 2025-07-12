@@ -1,5 +1,7 @@
 package com.devSage.blog.blog_app_apis.Payloads;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -7,6 +9,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -25,4 +30,17 @@ public class UserDto {
     private String password;
     @NotEmpty
     private String about;
+    private Set<RoleDto> roles = new HashSet<>();
+
+
+    @JsonIgnore
+    public String getPassword() {
+        return this.password;
+    }
+
+    @JsonProperty
+    public void setPassword(String password) {
+        this.password=password;
+    }
+
 }
